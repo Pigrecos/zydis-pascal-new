@@ -2243,6 +2243,7 @@ TZydisMnemonic = (
     ZYDIS_MNEMONIC_REQUIRED_BITS = 11
 );
 
+
 // Defines the `ZydisMachineMode` enum.
 TZydisMachineMode = (
     // 64 bit mode.

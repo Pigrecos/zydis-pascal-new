@@ -29,6 +29,8 @@ unit Zydis.Enums;
   {$PackRecords C}
   {$PACKENUM 4}
   {$WARN 3031 off : Values in enumeration types have to be ascending}
+{$ELSE}
+  {$Z4}
 {$ENDIF}
 
 interface

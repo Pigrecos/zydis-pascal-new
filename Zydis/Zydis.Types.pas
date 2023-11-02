@@ -29,7 +29,16 @@ unit Zydis.Types;
   {$PackRecords C}
 {$ENDIF}
 
+
+
 interface
+   uses Winapi.Windows;
+
+{$IFNDEF FPC}
+  type PtrUInt = NativeUInt ;
+  type PtrInt = NativeInt ;
+  type qword   = UInt64;
+{$ENDIF}
 
 Type
   ZyanU8       = UInt8;
