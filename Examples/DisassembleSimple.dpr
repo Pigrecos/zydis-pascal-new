@@ -6,12 +6,15 @@ program DisassembleSimple;
 {$IFDEF FPC}
   {$mode Delphi}{$H+}{$J-}
 {$ENDIF}
+{$IfDef MSWINDOWS}
+  {$APPTYPE CONSOLE}
+{$EndIf}
 
 uses
   SysUtils,
-  Zydis.apis,
-  Zydis.enums,
-  Zydis.types,
+  Zydis.Apis,
+  Zydis.Enums,
+  Zydis.Types,
   Zydis.Status,
   Zydis.Disassembler.Types;
 
@@ -35,8 +38,8 @@ begin
       runtime_address, @data[offset], SizeOf(data) - offset, instruction)) do
   begin
     WriteLn(Format('%.16X  %s', [runtime_address, UTF8ToString(instruction.text)]));
-    offset += instruction.info.length;
-    runtime_address += instruction.info.length;
+    inc(offset, instruction.info.length);
+    inc(runtime_address, instruction.info.length);
   end;
 
   ReadLn;

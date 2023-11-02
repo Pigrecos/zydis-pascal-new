@@ -29,15 +29,10 @@ unit Zydis.Types;
   {$PackRecords C}
 {$ENDIF}
 
-
-
 interface
-   uses Winapi.Windows;
-
-{$IFNDEF FPC}
-  type PtrUInt = NativeUInt ;
-  type PtrInt = NativeInt ;
-  type qword   = UInt64;
+{$IfNDef FPC}
+  uses
+    windows;
 {$ENDIF}
 
 Type
@@ -49,7 +44,7 @@ Type
   ZyanI16      = Int16;
   ZyanI32      = Int32;
   ZyanI64      = Int64;
-  ZyanUSize    = PtrUInt;
+  ZyanUSize    = UIntPtr;
   ZyanISize    = int64;
   ZyanUPointer = UIntPtr;
   ZyanIPointer = IntPtr;

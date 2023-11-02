@@ -30,6 +30,7 @@ unit Zydis.Enums;
   {$PACKENUM 4}
   {$WARN 3031 off : Values in enumeration types have to be ascending}
 {$ELSE}
+  {$MinEnumSize 4}
   {$Z4}
 {$ENDIF}
 
@@ -48,7 +49,7 @@ uses
 }
 type
   TZyanMemoryPageProtection = (
-    {$IFDEF WINDOWS}
+    {$IFDEF MSWINDOWS}
     ZYAN_PAGE_READONLY = PAGE_READONLY,
     ZYAN_PAGE_READWRITE = PAGE_READWRITE,
     ZYAN_PAGE_EXECUTE = PAGE_EXECUTE,

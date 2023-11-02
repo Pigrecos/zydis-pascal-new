@@ -42,8 +42,8 @@ var
   Form1: TForm1;
 
 var
-  offset : ZyanUSize = 0;
-  runtime_address: ZyanU64 = $007FFFFFFF400000;
+  offset : ZyanUSize;
+  runtime_address: ZyanU64 ;
   decoder : TZydisDecoder;
   Formatter : TZydisFormatter;
   instruction : TZydisDecodedInstruction;
@@ -69,7 +69,11 @@ begin
     Initialize(instruction);
     Initialize(buffer);
 
-    mmo1.Clear;
+    mmo1.Lines.Add('Disassembler');
+    mmo1.Lines.Add('==================');
+
+    offset := 0;
+    runtime_address := $007FFFFFFF400000;
 
     len := sizeof(data);
     while (offset < Length(Data)) and (ZYAN_SUCCESS(ZydisDecoderDecodeFull(@decoder, @data[offset], len - offset,instruction, operands))) do
@@ -94,7 +98,11 @@ var
 begin
     Initialize(instr);
 
-    mmo1.Clear;
+    mmo1.Lines.Add('Disassembler Simple');
+    mmo1.Lines.Add('==================');
+
+    offset := 0;
+    runtime_address := $007FFFFFFF400000;
 
     len := sizeof(data);
     while (offset < Length(Data)) and (ZYAN_SUCCESS(ZydisDisassembleIntel(ZYDIS_MACHINE_MODE_LONG_64, runtime_address, @data[offset], SizeOf(data) - offset, instr))) do
@@ -180,7 +188,8 @@ begin
     // Assemble our function.
     length := AssembleCode(buffer, alloc_size);
 
-    mmo1.Clear;
+    mmo1.Lines.Add('Encode Simple');
+    mmo1.Lines.Add('==================');
     // Print a hex-dump of the assembled code.
     mmo1.Lines.Add('Created byte-code:');
     for i := 0 to length - 1 do
